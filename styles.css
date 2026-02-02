@@ -1,0 +1,455 @@
+/* ===== Me in You — Romantic + Science themed ===== */
+:root {
+  --bg-deep: #0f0d14;
+  --bg-soft: #1a1625;
+  --accent-rose: #e8a0b5;
+  --accent-gold: #d4a574;
+  --accent-mint: #9dd9c8;
+  --accent-lavender: #b8a9c9;
+  --text-primary: #f5f0eb;
+  --text-soft: #c4bdb5;
+  --card-bg: rgba(26, 22, 37, 0.85);
+  --glow-rose: rgba(232, 160, 181, 0.4);
+  --glow-mint: rgba(157, 217, 200, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  line-height: 1.6;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Background effects — magnetic field / resonance vibe */
+.bg-effects {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.magnetic-wave {
+  position: absolute;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  opacity: 0.12;
+  animation: pulse-ring 8s ease-in-out infinite;
+}
+.magnetic-wave.wave-1 {
+  width: 80vmax;
+  height: 80vmax;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-color: var(--accent-rose);
+  animation-delay: 0s;
+}
+.magnetic-wave.wave-2 {
+  width: 60vmax;
+  height: 60vmax;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-color: var(--accent-mint);
+  animation-delay: -2.5s;
+}
+.magnetic-wave.wave-3 {
+  width: 40vmax;
+  height: 40vmax;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-color: var(--accent-lavender);
+  animation-delay: -5s;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.08; }
+  50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.18; }
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--accent-rose);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: float 12s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -2.5s);
+  left: calc(10% + var(--i) * 18%);
+  top: calc(20% + var(--i) * 12%);
+}
+.particle:nth-child(odd) {
+  background: var(--accent-mint);
+  animation-duration: 14s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); opacity: 0.4; }
+  25% { transform: translate(20px, -30px); opacity: 0.7; }
+  50% { transform: translate(-10px, 20px); opacity: 0.5; }
+  75% { transform: translate(15px, 10px); opacity: 0.6; }
+}
+
+/* Main container */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Steps — show one at a time (strong rules for iOS Safari) */
+.step {
+  display: none !important;
+  animation: fadeIn 0.6s ease-out;
+}
+.step.active {
+  display: block !important;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  padding: 0.4rem 0.75rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  background: transparent;
+  border: 1px solid rgba(196, 189, 181, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.back-btn:hover {
+  color: var(--accent-rose);
+  border-color: var(--accent-rose);
+}
+
+/* Step images */
+.step-image-wrap {
+  margin-bottom: 1.25rem;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(232, 160, 181, 0.2);
+}
+.step-image {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  display: block;
+}
+svg.step-image {
+  object-fit: contain;
+}
+
+.step-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent-rose);
+  margin-bottom: 0.75rem;
+}
+
+.step h1,
+.step h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: var(--text-soft);
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+/* Choice buttons */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.choice-btn {
+  display: block;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  min-height: 44px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border: 1px solid rgba(232, 160, 181, 0.25);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.choice-btn:hover {
+  background: rgba(232, 160, 181, 0.15);
+  border-color: var(--accent-rose);
+  box-shadow: 0 0 24px var(--glow-rose);
+  transform: translateY(-2px);
+}
+.choice-btn.primary {
+  background: linear-gradient(135deg, var(--accent-rose), var(--accent-gold));
+  border: none;
+  color: var(--bg-deep);
+  font-weight: 500;
+}
+.choice-btn.primary:hover {
+  box-shadow: 0 0 32px var(--glow-rose);
+  transform: translateY(-2px) scale(1.02);
+}
+.choice-btn.secondary {
+  border-color: rgba(196, 189, 181, 0.3);
+  color: var(--text-soft);
+}
+.choice-btn.secondary:hover {
+  border-color: var(--text-soft);
+  color: var(--text-primary);
+}
+
+.small-note {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  font-style: italic;
+}
+
+/* Confession step */
+.confession-step {
+  padding-top: 1rem;
+}
+
+.title-poem {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, var(--accent-rose), var(--accent-gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.confession-text {
+  margin-bottom: 2rem;
+}
+.confession-text p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  font-weight: 300;
+}
+.confession-text .highlight {
+  font-size: 1.15rem;
+  color: var(--accent-rose);
+  font-weight: 500;
+}
+.confession-text .small {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+}
+.confession-text strong {
+  color: var(--accent-mint);
+}
+
+.ask-again {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  color: var(--accent-rose);
+}
+
+.final-choices {
+  margin-top: 0.5rem;
+}
+
+/* ===== Response pages ===== */
+.response-page .container {
+  justify-content: center;
+  align-items: center;
+}
+
+.response-container {
+  width: 100%;
+}
+
+.response-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(232, 160, 181, 0.2);
+  border-radius: 20px;
+  padding: 2.5rem;
+  backdrop-filter: blur(12px);
+  text-align: center;
+  animation: fadeIn 0.7s ease-out;
+}
+
+.response-emoji {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.response-card h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  margin-bottom: 0.5rem;
+}
+
+.response-card .lead {
+  margin-bottom: 1.5rem;
+}
+
+.response-message {
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+.response-message p {
+  margin-bottom: 0.75rem;
+  color: var(--text-soft);
+  font-size: 1rem;
+}
+.response-message .sign-off {
+  margin-top: 1rem;
+  font-style: italic;
+  color: var(--accent-rose);
+}
+
+.bond-line {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-rose);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.back-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+.back-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-link:hover {
+  color: var(--accent-rose);
+}
+
+/* Response page themes */
+.response-yes .magnetic-wave { border-color: var(--accent-rose); }
+.response-yes .response-card { border-color: rgba(232, 160, 181, 0.35); }
+
+.response-need-time .magnetic-wave { border-color: var(--accent-lavender); }
+.response-lets-talk .magnetic-wave { border-color: var(--accent-mint); }
+.response-no .magnetic-wave { border-color: var(--accent-gold); opacity: 0.1; }
+.response-concerns .response-card,
+.response-busy .response-card,
+.response-get-to-know .response-card,
+.response-not-ready .response-card,
+.response-something-else .response-card {
+  text-align: left;
+}
+.response-concerns .choices,
+.response-busy .choices,
+.response-get-to-know .choices,
+.response-not-ready .choices,
+.response-something-else .choices {
+  margin-top: 1rem;
+}
+
+/* Mobile / iPhone */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.25rem 1rem 3rem;
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+    padding-bottom: max(3rem, env(safe-area-inset-bottom));
+  }
+  .response-card {
+    padding: 1.5rem;
+    padding-left: max(1.5rem, env(safe-area-inset-left));
+    padding-right: max(1.5rem, env(safe-area-inset-right));
+  }
+  .choice-btn {
+    padding: 0.95rem 1rem;
+    min-height: 48px;
+  }
+  .back-btn {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+  }
+  .step-image {
+    max-height: 160px;
+  }
+}
+
+/* Ensure only active step is visible on small viewports (iOS fix) */
+@media (max-width: 768px) {
+  .step:not(.active) {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+  }
+  .step.active {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+    position: relative !important;
+    left: auto !important;
+  }
+}
